@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+psycopg2-binary
+redis
+qdrant-client
+python-dotenv
+requests
+pandas

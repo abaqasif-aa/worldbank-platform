@@ -21,6 +21,16 @@ docker compose up -d api
 echo "Step 4: Starting Jupyter..."
 docker compose up -d jupyter
 
+echo "Waiting for services to be ready..."
+sleep 10
+
+echo "Opening browser tabs..."
+cmd.exe /c start http://localhost:8000/docs
+cmd.exe /c start http://localhost:8080
+cmd.exe /c start http://localhost:5000
+cmd.exe /c start http://localhost:8088
+cmd.exe /c start http://localhost:8888
+
 echo ""
 echo "Platform is up. Services available at:"
 echo "  API:      http://localhost:8000/docs"

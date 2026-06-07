@@ -1,0 +1,25 @@
+# Data files
+data/raw/
+data/charts/
+
+# Environment secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# dbt
+target/
+dbt_packages/
+.dbt/
+
+# MLflow
+mlruns/
+
+# Logs
+logs/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/

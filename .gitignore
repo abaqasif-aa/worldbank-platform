@@ -23,3 +23,5 @@ logs/
 
 # Jupyter checkpoints
 .ipynb_checkpoints/
+services/dbt/profiles.yml
+services/dbt/.user.yml

@@ -124,6 +124,21 @@ services:
         condition: service_started
     restart: unless-stopped
 
+  ingestion:
+      build:
+        context: ./services/ingestion
+        dockerfile: Dockerfile
+      container_name: wb_ingestion
+      profiles:
+        - tasks
+      env_file:
+        - .env
+      volumes:
+        - ./data:/app/data
+      depends_on:
+        postgres:
+          condition: service_healthy
+
 volumes:
   postgres_data:
   redis_data:

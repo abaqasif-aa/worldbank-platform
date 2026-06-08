@@ -65,11 +65,12 @@ services:
       - "8080:8080"
     volumes:
       - ./services/airflow/dags:/opt/airflow/dags
+      - ./services/airflow/entrypoint.sh:/opt/airflow/entrypoint.sh
       - airflow_logs:/opt/airflow/logs
     depends_on:
       postgres:
         condition: service_healthy
-    command: bash -c "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname Admin --role Admin --email admin@example.com && airflow webserver & airflow scheduler"
+    command: bash -c "/opt/airflow/entrypoint.sh"
     restart: unless-stopped
 
   superset:
@@ -122,6 +123,21 @@ services:
       qdrant:
         condition: service_started
     restart: unless-stopped
+
+  ingestion:
+      build:
+        context: ./services/ingestion
+        dockerfile: Dockerfile
+      container_name: wb_ingestion
+      profiles:
+        - tasks
+      env_file:
+        - .env
+      volumes:
+        - ./data:/app/data
+      depends_on:
+        postgres:
+          condition: service_healthy
 
 volumes:
   postgres_data:

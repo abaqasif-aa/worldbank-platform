@@ -25,3 +25,4 @@ logs/
 .ipynb_checkpoints/
 services/dbt/profiles.yml
 services/dbt/.user.yml
+.vscode/

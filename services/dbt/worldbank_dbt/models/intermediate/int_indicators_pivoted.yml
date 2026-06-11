@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: int_indicators_pivoted
+    description: >
+      One row per country per year, with all 5 World Bank indicators
+      pivoted into columns. Only includes the 148 real countries from
+      country_metadata — World Bank regional/income-group aggregates
+      (e.g. WLD, AFE) are excluded via inner join.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - country_code
+            - year
+    columns:
+      - name: country_code
+        description: "ISO 3166-1 alpha-3 country code"
+        tests:
+          - not_null
+
+      - name: year
+        description: "Year of observation"
+        tests:
+          - not_null
+
+      - name: gdp_usd
+        description: "GDP in current USD"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 30000000000000
+              row_condition: "gdp_usd is not null"
+
+      - name: inflation_rate
+        description: "Annual inflation rate, consumer prices (%)"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -50
+              max_value: 100000
+              row_condition: "inflation_rate is not null"
+
+      - name: unemployment_rate
+        description: "Unemployment, total (% of labour force)"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 100
+              row_condition: "unemployment_rate is not null"
+
+      - name: exports_pct_gdp
+        description: "Exports of goods and services (% of GDP)"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 300
+              row_condition: "exports_pct_gdp is not null"
+
+      - name: population
+        description: "Total population"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 2000000000
+              row_condition: "population is not null"

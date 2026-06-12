@@ -144,6 +144,8 @@ services:
       context: ./services/dbt
       dockerfile: Dockerfile
     container_name: wb_dbt
+    ports:
+      - "8089:8080"
     profiles:
       - tasks
     env_file:

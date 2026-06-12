@@ -1,0 +1,106 @@
+version: 2
+
+models:
+  - name: economic_indicators
+    description: >
+      Final analytical table — one row per country per year, enriched
+      with country metadata (region, income group) and derived metrics
+      (GDP growth rate, log GDP, crisis flags). This is the primary
+      table consumed by the RAG system, analytics models, and Superset
+      dashboards.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - country_code
+            - year
+    columns:
+      - name: country_code
+        description: "ISO 3166-1 alpha-3 country code"
+        tests:
+          - not_null
+
+      - name: country_name
+        description: "Full country name"
+        tests:
+          - not_null
+
+      - name: region
+        description: "World Bank region"
+        tests:
+          - not_null
+
+      - name: income_group
+        description: "World Bank income classification"
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - 'Low income'
+                - 'Lower middle income'
+                - 'Upper middle income'
+                - 'High income'
+
+      - name: year
+        description: "Year of observation (2000-2023)"
+        tests:
+          - not_null
+
+      - name: gdp_usd
+        description: "GDP in current USD"
+
+      - name: gdp_growth_rate
+        description: >
+          Year-over-year GDP growth rate (%). NULL for each country's
+          first year in the dataset (2000) since there is no prior
+          year to compare against. Upper bound of 200% accommodates
+          legitimate post-conflict recovery spikes (e.g. Sierra Leone
+          2001 at 164% following the end of its civil war).
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -75
+              max_value: 200
+              row_condition: "gdp_growth_rate is not null"
+
+      - name: log_gdp
+        description: "Natural log of GDP, used for regression modelling"
+
+      - name: inflation_rate
+        description: "Annual inflation rate, consumer prices (%)"
+
+      - name: unemployment_rate
+        description: "Unemployment, total (% of labour force)"
+
+      - name: exports_pct_gdp
+        description: "Exports of goods and services (% of GDP)"
+
+      - name: population
+        description: "Total population"
+
+      - name: crisis_flag
+        description: >
+          1 if inflation_rate > 10 AND unemployment_rate > 8.
+          0 if both values present but conditions not met.
+          NULL if either inflation_rate or unemployment_rate is missing.
+        tests:
+          - accepted_values:
+              values: [0, 1]
+              config:
+                where: "crisis_flag is not null"
+
+      - name: is_extreme_inflation
+        description: >
+          1 if inflation_rate > 100 (hyperinflation threshold).
+          0 if inflation_rate present but <= 100.
+          NULL if inflation_rate is missing.
+        tests:
+          - accepted_values:
+              values: [0, 1]
+              config:
+                where: "is_extreme_inflation is not null"
+
+      - name: income_group_enc
+        description: "Ordinal encoding of income_group: 0=Low, 1=Lower middle, 2=Upper middle, 3=High"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1, 2, 3]

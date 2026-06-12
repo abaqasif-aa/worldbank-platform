@@ -1,0 +1,149 @@
+country_code,country_name,region,income_group,capital
+AFG,Afghanistan,South Asia,Low income,Kabul
+ALB,Albania,Europe & Central Asia,Upper middle income,Tirana
+DZA,Algeria,Middle East & North Africa,Lower middle income,Algiers
+AGO,Angola,Sub-Saharan Africa,Lower middle income,Luanda
+ARG,Argentina,Latin America & Caribbean,Upper middle income,Buenos Aires
+ARM,Armenia,Europe & Central Asia,Upper middle income,Yerevan
+AUS,Australia,East Asia & Pacific,High income,Canberra
+AUT,Austria,Europe & Central Asia,High income,Vienna
+AZE,Azerbaijan,Europe & Central Asia,Upper middle income,Baku
+BGD,Bangladesh,South Asia,Lower middle income,Dhaka
+BLR,Belarus,Europe & Central Asia,Upper middle income,Minsk
+BEL,Belgium,Europe & Central Asia,High income,Brussels
+BEN,Benin,Sub-Saharan Africa,Low income,Porto-Novo
+BOL,Bolivia,Latin America & Caribbean,Lower middle income,Sucre
+BIH,Bosnia and Herzegovina,Europe & Central Asia,Upper middle income,Sarajevo
+BWA,Botswana,Sub-Saharan Africa,Upper middle income,Gaborone
+BRA,Brazil,Latin America & Caribbean,Upper middle income,Brasilia
+BGR,Bulgaria,Europe & Central Asia,Upper middle income,Sofia
+BFA,Burkina Faso,Sub-Saharan Africa,Low income,Ouagadougou
+BDI,Burundi,Sub-Saharan Africa,Low income,Gitega
+KHM,Cambodia,East Asia & Pacific,Lower middle income,Phnom Penh
+CMR,Cameroon,Sub-Saharan Africa,Lower middle income,Yaounde
+CAN,Canada,North America,High income,Ottawa
+CAF,Central African Republic,Sub-Saharan Africa,Low income,Bangui
+TCD,Chad,Sub-Saharan Africa,Low income,N'Djamena
+CHL,Chile,Latin America & Caribbean,High income,Santiago
+CHN,China,East Asia & Pacific,Upper middle income,Beijing
+COL,Colombia,Latin America & Caribbean,Upper middle income,Bogota
+COD,Congo Dem. Rep.,Sub-Saharan Africa,Low income,Kinshasa
+COG,Congo Rep.,Sub-Saharan Africa,Lower middle income,Brazzaville
+CRI,Costa Rica,Latin America & Caribbean,Upper middle income,San Jose
+CIV,Cote d'Ivoire,Sub-Saharan Africa,Lower middle income,Yamoussoukro
+HRV,Croatia,Europe & Central Asia,High income,Zagreb
+CUB,Cuba,Latin America & Caribbean,Upper middle income,Havana
+CYP,Cyprus,Europe & Central Asia,High income,Nicosia
+CZE,Czech Republic,Europe & Central Asia,High income,Prague
+DNK,Denmark,Europe & Central Asia,High income,Copenhagen
+DOM,Dominican Republic,Latin America & Caribbean,Upper middle income,Santo Domingo
+ECU,Ecuador,Latin America & Caribbean,Upper middle income,Quito
+EGY,Egypt,Middle East & North Africa,Lower middle income,Cairo
+SLV,El Salvador,Latin America & Caribbean,Lower middle income,San Salvador
+EST,Estonia,Europe & Central Asia,High income,Tallinn
+ETH,Ethiopia,Sub-Saharan Africa,Low income,Addis Ababa
+FIN,Finland,Europe & Central Asia,High income,Helsinki
+FRA,France,Europe & Central Asia,High income,Paris
+GAB,Gabon,Sub-Saharan Africa,Upper middle income,Libreville
+GMB,Gambia,Sub-Saharan Africa,Low income,Banjul
+GEO,Georgia,Europe & Central Asia,Upper middle income,Tbilisi
+DEU,Germany,Europe & Central Asia,High income,Berlin
+GHA,Ghana,Sub-Saharan Africa,Lower middle income,Accra
+GRC,Greece,Europe & Central Asia,High income,Athens
+GTM,Guatemala,Latin America & Caribbean,Upper middle income,Guatemala City
+GIN,Guinea,Sub-Saharan Africa,Low income,Conakry
+HTI,Haiti,Latin America & Caribbean,Low income,Port-au-Prince
+HND,Honduras,Latin America & Caribbean,Lower middle income,Tegucigalpa
+HUN,Hungary,Europe & Central Asia,High income,Budapest
+IND,India,South Asia,Lower middle income,New Delhi
+IDN,Indonesia,East Asia & Pacific,Upper middle income,Jakarta
+IRN,Iran,Middle East & North Africa,Lower middle income,Tehran
+IRQ,Iraq,Middle East & North Africa,Upper middle income,Baghdad
+IRL,Ireland,Europe & Central Asia,High income,Dublin
+ISR,Israel,Middle East & North Africa,High income,Jerusalem
+ITA,Italy,Europe & Central Asia,High income,Rome
+JAM,Jamaica,Latin America & Caribbean,Upper middle income,Kingston
+JPN,Japan,East Asia & Pacific,High income,Tokyo
+JOR,Jordan,Middle East & North Africa,Upper middle income,Amman
+KAZ,Kazakhstan,Europe & Central Asia,Upper middle income,Astana
+KEN,Kenya,Sub-Saharan Africa,Lower middle income,Nairobi
+KOR,Korea Rep.,East Asia & Pacific,High income,Seoul
+KWT,Kuwait,Middle East & North Africa,High income,Kuwait City
+KGZ,Kyrgyz Republic,Europe & Central Asia,Lower middle income,Bishkek
+LAO,Lao PDR,East Asia & Pacific,Lower middle income,Vientiane
+LVA,Latvia,Europe & Central Asia,High income,Riga
+LBN,Lebanon,Middle East & North Africa,Lower middle income,Beirut
+LBR,Liberia,Sub-Saharan Africa,Low income,Monrovia
+LBY,Libya,Middle East & North Africa,Upper middle income,Tripoli
+LTU,Lithuania,Europe & Central Asia,High income,Vilnius
+LUX,Luxembourg,Europe & Central Asia,High income,Luxembourg
+MDG,Madagascar,Sub-Saharan Africa,Low income,Antananarivo
+MWI,Malawi,Sub-Saharan Africa,Low income,Lilongwe
+MYS,Malaysia,East Asia & Pacific,Upper middle income,Kuala Lumpur
+MDV,Maldives,South Asia,Upper middle income,Male
+MLI,Mali,Sub-Saharan Africa,Low income,Bamako
+MLT,Malta,Middle East & North Africa,High income,Valletta
+MRT,Mauritania,Sub-Saharan Africa,Lower middle income,Nouakchott
+MEX,Mexico,Latin America & Caribbean,Upper middle income,Mexico City
+MDA,Moldova,Europe & Central Asia,Upper middle income,Chisinau
+MNG,Mongolia,East Asia & Pacific,Lower middle income,Ulaanbaatar
+MAR,Morocco,Middle East & North Africa,Lower middle income,Rabat
+MOZ,Mozambique,Sub-Saharan Africa,Low income,Maputo
+MMR,Myanmar,East Asia & Pacific,Lower middle income,Naypyidaw
+NAM,Namibia,Sub-Saharan Africa,Upper middle income,Windhoek
+NPL,Nepal,South Asia,Lower middle income,Kathmandu
+NLD,Netherlands,Europe & Central Asia,High income,Amsterdam
+NZL,New Zealand,East Asia & Pacific,High income,Wellington
+NIC,Nicaragua,Latin America & Caribbean,Lower middle income,Managua
+NER,Niger,Sub-Saharan Africa,Low income,Niamey
+NGA,Nigeria,Sub-Saharan Africa,Lower middle income,Abuja
+MKD,North Macedonia,Europe & Central Asia,Upper middle income,Skopje
+NOR,Norway,Europe & Central Asia,High income,Oslo
+OMN,Oman,Middle East & North Africa,High income,Muscat
+PAK,Pakistan,South Asia,Lower middle income,Islamabad
+PAN,Panama,Latin America & Caribbean,High income,Panama City
+PNG,Papua New Guinea,East Asia & Pacific,Lower middle income,Port Moresby
+PRY,Paraguay,Latin America & Caribbean,Upper middle income,Asuncion
+PER,Peru,Latin America & Caribbean,Upper middle income,Lima
+PHL,Philippines,East Asia & Pacific,Lower middle income,Manila
+POL,Poland,Europe & Central Asia,High income,Warsaw
+PRT,Portugal,Europe & Central Asia,High income,Lisbon
+QAT,Qatar,Middle East & North Africa,High income,Doha
+ROU,Romania,Europe & Central Asia,Upper middle income,Bucharest
+RUS,Russia,Europe & Central Asia,Upper middle income,Moscow
+RWA,Rwanda,Sub-Saharan Africa,Low income,Kigali
+SAU,Saudi Arabia,Middle East & North Africa,High income,Riyadh
+SEN,Senegal,Sub-Saharan Africa,Lower middle income,Dakar
+SRB,Serbia,Europe & Central Asia,Upper middle income,Belgrade
+SLE,Sierra Leone,Sub-Saharan Africa,Low income,Freetown
+SGP,Singapore,East Asia & Pacific,High income,Singapore
+SVK,Slovak Republic,Europe & Central Asia,High income,Bratislava
+SVN,Slovenia,Europe & Central Asia,High income,Ljubljana
+SOM,Somalia,Sub-Saharan Africa,Low income,Mogadishu
+ZAF,South Africa,Sub-Saharan Africa,Upper middle income,Pretoria
+SSD,South Sudan,Sub-Saharan Africa,Low income,Juba
+ESP,Spain,Europe & Central Asia,High income,Madrid
+LKA,Sri Lanka,South Asia,Lower middle income,Colombo
+SDN,Sudan,Sub-Saharan Africa,Low income,Khartoum
+SWE,Sweden,Europe & Central Asia,High income,Stockholm
+CHE,Switzerland,Europe & Central Asia,High income,Bern
+SYR,Syria,Middle East & North Africa,Low income,Damascus
+TJK,Tajikistan,Europe & Central Asia,Low income,Dushanbe
+TZA,Tanzania,Sub-Saharan Africa,Lower middle income,Dodoma
+THA,Thailand,East Asia & Pacific,Upper middle income,Bangkok
+TGO,Togo,Sub-Saharan Africa,Low income,Lome
+TUN,Tunisia,Middle East & North Africa,Lower middle income,Tunis
+TUR,Turkey,Europe & Central Asia,Upper middle income,Ankara
+TKM,Turkmenistan,Europe & Central Asia,Upper middle income,Ashgabat
+UGA,Uganda,Sub-Saharan Africa,Low income,Kampala
+UKR,Ukraine,Europe & Central Asia,Lower middle income,Kyiv
+ARE,United Arab Emirates,Middle East & North Africa,High income,Abu Dhabi
+GBR,United Kingdom,Europe & Central Asia,High income,London
+USA,United States,North America,High income,Washington DC
+URY,Uruguay,Latin America & Caribbean,High income,Montevideo
+UZB,Uzbekistan,Europe & Central Asia,Lower middle income,Tashkent
+VEN,Venezuela,Latin America & Caribbean,Upper middle income,Caracas
+VNM,Vietnam,East Asia & Pacific,Lower middle income,Hanoi
+YEM,Yemen,Middle East & North Africa,Low income,Sanaa
+ZMB,Zambia,Sub-Saharan Africa,Lower middle income,Lusaka
+ZWE,Zimbabwe,Sub-Saharan Africa,Lower middle income,Harare

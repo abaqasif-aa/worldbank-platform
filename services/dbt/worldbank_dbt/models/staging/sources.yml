@@ -1,0 +1,36 @@
+version: 2
+
+sources:
+  - name: worldbank_raw
+    schema: raw
+    description: "Raw World Bank economic indicator data loaded by the ingestion service"
+    freshness:
+      warn_after: {count: 2, period: day}
+      error_after: {count: 7, period: day}
+    loaded_at_field: ingested_at
+    tables:
+      - name: indicator_records
+        description: "One row per country, indicator, and year. Raw from World Bank API."
+        columns:
+          - name: country_code
+            description: "ISO 3166-1 alpha-3 country code"
+            tests:
+              - not_null
+          - name: indicator_code
+            description: "World Bank indicator code e.g. NY.GDP.MKTP.CD"
+            tests:
+              - not_null
+          - name: year
+            description: "Year of the observation"
+            tests:
+              - not_null
+          - name: value
+            description: "Indicator value — null means country did not report"
+      - name: country_metadata
+        description: "Country names, regions and income groups"
+        columns:
+          - name: country_code
+            description: "ISO 3166-1 alpha-3 country code"
+            tests:
+              - not_null
+              - unique

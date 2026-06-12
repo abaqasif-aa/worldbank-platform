@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: stg_indicators
+    description: >
+      Cleaned long-format World Bank indicator data.
+      One row per country/region code, indicator, and year.
+      Includes both real countries and World Bank aggregate codes
+      (e.g. WLD, AFE) — filtering to real countries happens downstream
+      in the intermediate layer.
+    columns:
+      - name: country_code
+        description: "ISO 3166-1 alpha-3 code OR World Bank aggregate code"
+        tests:
+          - not_null
+      - name: indicator_code
+        description: "World Bank indicator code"
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - 'NY.GDP.MKTP.CD'
+                - 'FP.CPI.TOTL.ZG'
+                - 'SL.UEM.TOTL.ZS'
+                - 'NE.EXP.GNFS.ZS'
+                - 'SP.POP.TOTL'
+      - name: indicator_name
+        description: "Human-readable indicator name"
+        tests:
+          - not_null
+      - name: year
+        description: "Year of observation"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 2000
+              max_value: 2023
+      - name: value
+        description: "Indicator value, never null after staging"
+        tests:
+          - not_null

@@ -1,8 +1,8 @@
 fastapi
-uvicorn
-psycopg2-binary
-redis
-qdrant-client
-python-dotenv
-requests
 pandas
+psycopg2-binary
+python-dotenv
+qdrant-client
+redis
+requests
+uvicorn

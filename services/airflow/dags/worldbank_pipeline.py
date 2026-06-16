@@ -99,7 +99,18 @@ with DAG(
         task_id="seed_cache",
         python_callable=seed_redis_cache,
     )
+    
+    # Task 4 — Generate embeddings (optional, can be run separately or on demand)
+    embed = DockerOperator(
+        task_id="embed",
+        image="worldbank-embeddings:latest",
+        container_name="airflow_embeddings_run",
+        network_mode=NETWORK,
+        environment=load_env_vars(),
+        auto_remove=True,
+        docker_url="unix://var/run/docker.sock",
+    )
 
     # ── Dependencies ──────────────────────────────────────────────────────────
-    ingest >> dbt_build >> seed_cache
+    ingest >> dbt_build >> seed_cache >> embed
 

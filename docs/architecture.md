@@ -34,7 +34,7 @@ and run with a single command.
 - [x] Phase 6 — Redis cache-aside layer for country metadata
 - [x] Phase 7 — Airflow DAG (ingest → dbt → cache refresh, DockerOperator, daily 6am UTC)
 - [x] Phase 8 — Embeddings + Qdrant (sentence-transformers, 384-dim, 3552 vectors)
-- [ ] Phase 9 — RAG pipeline
+- [x] Phase 9 — RAG pipeline (SQL/semantic/hybrid routing, Ollama qwen2:1.5b)
 - [ ] Phase 10-12 — Analytics + MLflow (regression, clustering, decision tree)
 - [ ] Phase 13 — Superset dashboards
 - [ ] Phase 14 — CI/CD

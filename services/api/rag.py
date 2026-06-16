@@ -93,7 +93,7 @@ def rag_query(question: str, region: str = None, top_k: int = TOP_K) -> dict:
         with_payload=True,
     ).points
 
-    
+
     if not results:
         return {
             "answer": "No relevant economic data found for your question.",
@@ -132,7 +132,14 @@ ANSWER:"""
         temperature=0.1,
     )
 
-    answer = response.choices[0].message.content.strip()
+    raw_answer = response.choices[0].message.content
+    log.info(f"Raw LLM response: {raw_answer[:200]}")
+    
+    # Strip Qwen3 thinking blocks if present
+    if "<think>" in raw_answer and "</think>" in raw_answer:
+        answer = raw_answer.split("</think>")[-1].strip()
+    else:
+        answer = raw_answer.strip()
 
     return {
         "answer":          answer,

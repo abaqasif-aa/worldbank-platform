@@ -56,17 +56,23 @@ services:
   airflow:
     image: apache/airflow:2.9.0
     container_name: wb_airflow
+    user: "50000:1001"
+    group_add:
+      - "1001"
     environment:
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/airflow
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
       AIRFLOW__WEBSERVER__SECRET_KEY: "worldbank-secret-key"
+      _PIP_ADDITIONAL_REQUIREMENTS: "apache-airflow-providers-docker"
     ports:
       - "8080:8080"
     volumes:
       - ./services/airflow/dags:/opt/airflow/dags
       - ./services/airflow/entrypoint.sh:/opt/airflow/entrypoint.sh
       - airflow_logs:/opt/airflow/logs
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./.env:/opt/airflow/.env
     depends_on:
       postgres:
         condition: service_healthy

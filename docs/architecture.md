@@ -32,7 +32,7 @@ and run with a single command.
 - [x] Phase 4 — Ingestion service (27,505 raw rows loaded)
 - [x] Phase 5 — dbt medallion architecture (36 tests passing, snapshots, docs)
 - [x] Phase 6 — Redis cache-aside layer for country metadata
-- [ ] Phase 7 — Airflow DAG (ingest -> dbt orchestration)
+- [x] Phase 7 — Airflow DAG (ingest → dbt → cache refresh, DockerOperator, daily 6am UTC)
 - [ ] Phase 8 — Embeddings + Qdrant
 - [ ] Phase 9 — RAG pipeline
 - [ ] Phase 10-12 — Analytics + MLflow (regression, clustering, decision tree)

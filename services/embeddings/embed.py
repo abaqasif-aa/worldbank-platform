@@ -6,6 +6,7 @@ and upserts into Qdrant for semantic search.
 import os
 import logging
 
+import hashlib
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from dotenv import load_dotenv
@@ -138,7 +139,7 @@ def run_embedding_pipeline():
     log.info("Upserting vectors into Qdrant...")
     points = []
     for record, embedding, document in zip(records, embeddings, documents):
-        point_id = abs(hash(f"{record['country_code']}-{record['year']}")) % (2**63)
+        point_id = int(hashlib.md5(f"{record['country_code']}-{record['year']}".encode()).hexdigest()[:16], 16)
         points.append(PointStruct(
             id=point_id,
             vector=embedding.tolist(),

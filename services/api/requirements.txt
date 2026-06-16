@@ -6,3 +6,5 @@ qdrant-client
 redis
 requests
 uvicorn
+openai
+sentence-transformers

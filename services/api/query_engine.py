@@ -105,7 +105,7 @@ Available filters:
 - crisis_flag: 1 or null
 - order_by: column name or null
 - order_dir: "DESC" or "ASC" or null
-- limit: integer (default 10) or null
+- limit: integer (default 20) or null
 
 Example:
 Question: "Which countries had inflation above 10% in 2022?"
@@ -203,7 +203,8 @@ def build_sql(filters: dict) -> tuple[str, list]:
         direction = "DESC" if filters.get("order_dir", "DESC") == "DESC" else "ASC"
         order = f"ORDER BY {filters['order_by']} {direction}"
 
-    limit = f"LIMIT {int(filters.get('limit', 10))}"
+    limit_val = filters.get('limit') or 20
+    limit = f"LIMIT {int(limit_val)}"
 
     sql = f"{select} {where} {order} {limit}"
     return sql, params
@@ -271,7 +272,10 @@ def sql_query(question: str) -> dict:
             "route": "SQL",
         }
 
-    prompt = f"""You are an economic research assistant. Answer the question using ONLY the data below. Be specific — cite country names, years, and figures. Keep your answer concise and factual. Do not show your thinking.
+    prompt = f"""You are an economic research assistant. Answer the question using ONLY the data below.
+List ALL countries in the data — do not stop early or truncate the list.
+Be specific — cite country names, country codes, and exact figures for every entry.
+Format as a numbered list. Do not add any commentary beyond what the data shows.
 
 DATA:
 {context}

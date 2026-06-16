@@ -161,7 +161,20 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-
+  embeddings:
+    build:
+      context: ./services/embeddings
+      dockerfile: Dockerfile
+    container_name: wb_embeddings
+    profiles:
+      - tasks
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
 volumes:
   postgres_data:
   redis_data:

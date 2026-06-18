@@ -176,6 +176,19 @@ services:
         condition: service_healthy
       qdrant:
         condition: service_started
+  streamlit:
+    build:
+      context: ./services/streamlit
+      dockerfile: Dockerfile
+    container_name: wb_streamlit
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./services/streamlit:/app
+    depends_on:
+      api:
+        condition: service_started
+    restart: unless-stopped
 volumes:
   postgres_data:
   redis_data:

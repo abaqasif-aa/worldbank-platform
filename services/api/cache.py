@@ -97,3 +97,37 @@ def get_country_metadata(country_code: str) -> dict | None:
     data = dict(row)
     r.set(key, json.dumps(data), ex=COUNTRY_CACHE_TTL)
     return data
+
+
+# ── Conversation history (for RAG follow-up questions) ─────────────────────────
+CONVERSATION_TTL = 60 * 30  # 30 minutes of inactivity
+
+
+def get_conversation_history(session_id: str) -> list[dict]:
+    """Retrieve conversation history for a session. Returns list of
+    {"question": ..., "answer": ...} dicts, oldest first."""
+    r = get_redis()
+    key = f"conversation:{session_id}"
+    raw = r.get(key)
+    if raw is None:
+        return []
+    return json.loads(raw)
+
+
+def append_to_conversation(session_id: str, question: str, answer: str, max_turns: int = 5):
+    """Append a question/answer pair to conversation history,
+    keeping only the most recent max_turns exchanges."""
+    r = get_redis()
+    key = f"conversation:{session_id}"
+
+    history = get_conversation_history(session_id)
+    history.append({"question": question, "answer": answer})
+    history = history[-max_turns:]
+
+    r.set(key, json.dumps(history), ex=CONVERSATION_TTL)
+
+
+def clear_conversation(session_id: str):
+    """Clear conversation history for a session (e.g. user starts a new chat)."""
+    r = get_redis()
+    r.delete(f"conversation:{session_id}")

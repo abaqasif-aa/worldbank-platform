@@ -29,6 +29,45 @@ def get_pg_conn():
         password=os.getenv("POSTGRES_PASSWORD", "de"),
     )
 
+# ── Step 0: Resolve follow-up questions using conversation history ────────────
+def resolve_question(question: str, history: list[dict]) -> str:
+    """
+    If there's conversation history, rewrite the question to be
+    fully self-contained — resolving references like 'it', 'that',
+    'what about X' using prior context.
+
+    If there's no history, returns the question unchanged.
+    """
+    if not history:
+        return question
+
+    history_text = "\n".join([
+        f"Q: {turn['question']}\nA: {turn['answer']}"
+        for turn in history
+    ])
+
+    prompt = f"""You are a question rewriter. Given the conversation history below, rewrite the LATEST question to be fully self-contained — resolve any pronouns or references like "it", "that", "what about X" using the context.
+
+If the latest question is already self-contained (doesn't reference prior context), return it UNCHANGED.
+
+Respond with ONLY the rewritten question. No explanation, no quotes.
+
+CONVERSATION HISTORY:
+{history_text}
+
+LATEST QUESTION: {question}
+
+REWRITTEN QUESTION:"""
+
+    response = get_llm_client().chat.completions.create(
+        model=os.getenv("OLLAMA_MODEL", "qwen3.5:latest"),
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.0,
+    )
+
+    rewritten = response.choices[0].message.content.strip()
+    log.info(f"Resolved question: '{question}' -> '{rewritten}'")
+    return rewritten
 
 # ── Step 1: Classify question ─────────────────────────────────────────────────
 def classify_question(question: str) -> str:

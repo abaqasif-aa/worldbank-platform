@@ -13,10 +13,12 @@ and run with a single command.
 |---|---|
 | Ingestion | Python + FastAPI |
 | Storage | PostgreSQL |
-| Cache | Redis |
+| Cache | Redis (country metadata + conversation memory) |
 | Transformation | dbt |
-| Orchestration | Airflow (planned) |
-| Vector DB | Qdrant (planned) |
+| Orchestration | Airflow |
+| Vector DB | Qdrant |
+| LLM | LLaMA 3.1 8B (Ollama, local GPU) |
+| Chat interface | Streamlit |
 | Experiment tracking | MLflow (planned) |
 | Dashboards | Superset (planned) |
 
@@ -34,7 +36,7 @@ and run with a single command.
 - [x] Phase 6 — Redis cache-aside layer for country metadata
 - [x] Phase 7 — Airflow DAG (ingest → dbt → cache refresh, DockerOperator, daily 6am UTC)
 - [x] Phase 8 — Embeddings + Qdrant (sentence-transformers, 384-dim, 3552 vectors)
-- [x] Phase 9 — RAG pipeline (SQL/semantic/hybrid routing, Ollama qwen2:1.5b)
+- [x] Phase 9 — RAG pipeline (SQL/semantic/hybrid routing, LLaMA 3.1 8B 100% GPU, conversation memory, Streamlit chat UI)
 - [ ] Phase 10-12 — Analytics + MLflow (regression, clustering, decision tree)
 - [ ] Phase 13 — Superset dashboards
 - [ ] Phase 14 — CI/CD
@@ -59,3 +61,9 @@ and run with a single command.
 - **Docker Compose `profiles`**: long-running services (Postgres, Redis,
   Airflow, etc.) start with `docker compose up`; one-off tasks (ingestion,
   dbt) use `--profile tasks run --rm` and exit after completing.
+- **Conversation memory via Redis + LLM rewriting**: follow-up questions
+  ("what about in 2006?") are resolved into fully self-contained questions
+  using recent conversation history before classification/retrieval —
+  keeping the existing SQL/semantic/hybrid pipeline unchanged while adding
+  multi-turn conversational support. History is stored in Redis with a
+  30-minute inactivity TTL.

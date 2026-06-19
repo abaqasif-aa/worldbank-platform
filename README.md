@@ -19,7 +19,7 @@ design reasoning.
 
 ## Architecture
 
-![Architecture diagram](docs/images/architecture.png)
+![Architecture diagram](docs/images/architecture.svg)
 
 ## See it in action
 

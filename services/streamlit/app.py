@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import uuid
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -10,38 +11,38 @@ st.set_page_config(
 
 API_URL = "http://api:8000"
 
+if "session_id" not in st.session_state:
+    st.session_state.session_id = str(uuid.uuid4())
+
+if "display_history" not in st.session_state:
+    st.session_state.display_history = []
+
 st.title("🌍 World Bank Economic Intelligence Assistant")
 st.caption("Ask natural language questions about global economic data (2000-2023)")
 
-# ── Input form ────────────────────────────────────────────────────────────────
-REGIONS = [
-    "Any region",
-    "Sub-Saharan Africa",
-    "Europe & Central Asia",
-    "Latin America & Caribbean",
-    "Middle East & North Africa",
-    "North America",
-    "South Asia",
-    "East Asia & Pacific",
-]
 
-question = st.text_input(
-    "Ask a question about global economic data:",
-    placeholder="e.g. Which countries had inflation above 10% in 2022?",
-)
+# ── Render existing conversation, oldest to newest ────────────────────────────
+for turn in st.session_state.display_history:
+    with st.chat_message("user"):
+        st.write(turn["question"])
+    with st.chat_message("assistant"):
+        st.write(turn["answer"])
+        st.caption(f"Route used: **{turn['route']}** | Records retrieved: {turn['context_records']}")
+        if turn["sources"]:
+            with st.expander("View sources"):
+                st.table(turn["sources"])
 
-region = st.selectbox("Filter by region (optional):", REGIONS)
+# ── Chat input — pinned to the bottom of the page ─────────────────────────────
+question = st.chat_input("Ask a question about global economic data...")
 
-submit = st.button("Ask", type="primary")
+if question:
+    with st.chat_message("user"):
+        st.write(question)
 
-if submit:
-    if not question.strip():
-        st.warning("Please enter a question.")
-    else:
+    with st.chat_message("assistant"):
         with st.spinner("Thinking... (this can take 10-30 seconds)"):
-            payload = {"question": question}
-            if region != "Any region":
-                payload["region"] = region
+            payload = {"question": question, "session_id": st.session_state.session_id}
+        
 
             try:
                 response = requests.post(
@@ -52,15 +53,24 @@ if submit:
                 response.raise_for_status()
                 result = response.json()
 
-                st.success("Answer:")
                 st.write(result["answer"])
 
                 route = result.get("route", "SEMANTIC")
-                st.caption(f"Route used: **{route}** | Records retrieved: {result.get('context_records', 0)}")
+                context_records = result.get("context_records", 0)
+                sources = result.get("sources", [])
 
-                if result.get("sources"):
+                st.caption(f"Route used: **{route}** | Records retrieved: {context_records}")
+                if sources:
                     with st.expander("View sources"):
-                        st.table(result["sources"])
+                        st.table(sources)
+
+                st.session_state.display_history.append({
+                    "question": question,
+                    "answer": result["answer"],
+                    "route": route,
+                    "context_records": context_records,
+                    "sources": sources,
+                })
 
             except requests.exceptions.Timeout:
                 st.error("Request timed out. The model may be under heavy load — try again.")

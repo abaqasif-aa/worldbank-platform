@@ -311,10 +311,14 @@ def sql_query(question: str) -> dict:
             "route": "SQL",
         }
 
+    if len(rows) <= 3:
+        format_instruction = "Write a natural, conversational sentence (or two) answering the question directly using the figures below. Do not use a list or bullet points for this few results."
+    else:
+        format_instruction = "List ALL entries in the data — do not stop early or truncate. Format as a numbered list, citing country names and exact figures for every entry."
+
     prompt = f"""You are an economic research assistant. Answer the question using ONLY the data below.
-List ALL countries in the data — do not stop early or truncate the list.
-Be specific — cite country names, country codes, and exact figures for every entry.
-Format as a numbered list. Do not add any commentary beyond what the data shows.
+{format_instruction}
+Do not add commentary beyond what the data shows. Do not repeat the raw data format — write a proper answer.
 
 DATA:
 {context}

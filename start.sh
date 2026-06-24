@@ -21,6 +21,9 @@ docker compose up -d api
 echo "Step 4: Starting Jupyter..."
 docker compose up -d jupyter
 
+echo "Step 5: Starting Streamlit..."
+docker compose up -d streamlit
+
 echo "Waiting for services to be ready..."
 sleep 10
 
@@ -30,6 +33,7 @@ cmd.exe /c start http://localhost:8080
 cmd.exe /c start http://localhost:5000
 cmd.exe /c start http://localhost:8088
 cmd.exe /c start http://localhost:8888
+cmd.exe /c start http://localhost:8501
 
 echo ""
 echo "Platform is up. Services available at:"
@@ -38,3 +42,4 @@ echo "  Airflow:  http://localhost:8080"
 echo "  MLflow:   http://localhost:5000"
 echo "  Superset: http://localhost:8088"
 echo "  Jupyter:  http://localhost:8888"
+echo "  Streamlit: http://localhost:8501"

@@ -319,7 +319,7 @@ def sql_query(question: str) -> dict:
     prompt = f"""You are an economic research assistant. Answer the question using ONLY the data below.
 {format_instruction}
 Do not add commentary beyond what the data shows. Do not repeat the raw data format — write a proper answer.
-
+git status
 DATA:
 {context}
 

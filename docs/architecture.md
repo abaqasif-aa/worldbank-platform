@@ -67,3 +67,6 @@ and run with a single command.
   keeping the existing SQL/semantic/hybrid pipeline unchanged while adding
   multi-turn conversational support. History is stored in Redis with a
   30-minute inactivity TTL.
+
+## Architecture
+![Architecture diagram](docs/images/architecture.png)

@@ -50,7 +50,9 @@ services:
     environment:
       MLFLOW_BACKEND_STORE_URI: sqlite:////mlflow/artifacts/mlflow.db
       MLFLOW_DEFAULT_ARTIFACT_ROOT: /mlflow/artifacts
-    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:////mlflow/artifacts/mlflow.db --default-artifact-root /mlflow/artifacts
+      MLFLOW_FLASK_SERVER_SECRET_KEY: "worldbank-mlflow-key"
+      MLFLOW_SECURITY_MIDDLEWARE_ENABLED: "false"
+    command: "mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:////mlflow/artifacts/mlflow.db --default-artifact-root /mlflow/artifacts --serve-artifacts --allowed-hosts mlflow,mlflow:5000,localhost,localhost:5000,127.0.0.1,127.0.0.1:5000,*"
     restart: unless-stopped
 
   airflow:
@@ -107,8 +109,11 @@ services:
       - "8888:8888"
     volumes:
       - ./services/jupyter:/home/jovyan/work
+      - mlflow_data:/mlflow/artifacts
     environment:
       JUPYTER_ENABLE_LAB: "yes"
+      MLFLOW_TRACKING_URI: "http://mlflow:5000"
+      MLFLOW_ENABLE_ARTIFACTS_PROGRESS_BAR: "false"
     command: >
       bash -c "pip install -r /home/jovyan/work/requirements.txt &&
       start-notebook.sh --NotebookApp.token=''"

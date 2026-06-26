@@ -1,5 +1,7 @@
 # World Bank Economic Intelligence Platform
 
+![CI](https://github.com/abaqasif-aa/worldbank-platform/actions/workflows/ci.yml/badge.svg)
+
 An open-source data engineering and AI platform built on World Bank economic
 indicators — GDP, inflation, unemployment, trade, and population — for 148
 countries across 2000–2023.
@@ -170,6 +172,7 @@ memory, Streamlit chat interface, and analytics notebooks (EDA, Ridge
 regression with SHAP explainability, KMeans clustering comparing pre/post
 COVID country economic archetypes) — all tracked in MLflow.
 
-In progress: CI/CD.
+CI/CD complete: GitHub Actions validates Docker Compose config, Python 
+syntax, and dbt project compilation on every push to main.
 
 Full phase-by-phase progress: [docs/architecture.md](docs/architecture.md)

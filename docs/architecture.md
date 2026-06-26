@@ -40,7 +40,7 @@ and run with a single command.
 - [x] Phase 10 — EDA notebook (distributions, correlations, outlier analysis)
 - [x] Phase 11 — Ridge regression with SHAP explainability (MLflow tracked)
 - [x] Phase 12 — KMeans clustering: 2019 vs 2022 COVID comparison (MLflow tracked)
-- [ ] Phase 13 — CI/CD
+- [x] Phase 13 — CI/CD
 - [ ] ELK stack for centralised logging
 
 ## Key design decisions
@@ -68,6 +68,12 @@ and run with a single command.
   keeping the existing SQL/semantic/hybrid pipeline unchanged while adding
   multi-turn conversational support. History is stored in Redis with a
   30-minute inactivity TTL.
+- **GitHub Actions CI**: validates Docker Compose config, Python syntax, 
+  and dbt project compilation on every push — catches broken configs and 
+  syntax errors before they land on main. Runs in ~30 seconds.
+- **`setup.sh` with OS detection**: automates first-time setup from 
+  `git clone` to running platform in one command, detecting Windows (WSL2) 
+  vs Linux/Mac automatically.
 
 ## Architecture
 ![Architecture diagram](images/architecture.png)

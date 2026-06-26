@@ -1,0 +1,7 @@
+*.png
+*.csv
+*.parquet
+__pycache__/
+.ipynb_checkpoints/
+*.pkl
+iframe_figures/

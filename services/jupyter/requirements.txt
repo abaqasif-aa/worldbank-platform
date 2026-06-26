@@ -1,0 +1,9 @@
+psycopg2-binary
+python-dotenv
+sqlalchemy
+mlflow==3.13.0
+shap
+scikit-learn
+numpy==1.26.4
+joblib
+plotly

@@ -31,7 +31,7 @@ jobs:
 
       - name: Validate dbt project
         run: |
-          pip install dbt-postgres==1.7.0 --quiet
+          pip install dbt-postgres==1.7.0 protobuf==4.25.3 --quiet
           cd services/dbt/worldbank_dbt
           dbt parse --profiles-dir ..
         env:

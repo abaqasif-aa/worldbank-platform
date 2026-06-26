@@ -67,7 +67,7 @@ Redis with a 30-minute inactivity TTL.
 | Vector search | Qdrant | OpenSearch (vector engine) |
 | LLM | LLaMA 3.1 8B (Ollama, local GPU) | Bedrock |
 | Chat interface | Streamlit | — |
-| Experiment tracking | MLflow *(in progress)* | SageMaker Experiments |
+| Experiment tracking | MLflow | SageMaker Experiments |
 | Dashboards | Apache Superset *(in progress)* | QuickSight |
 
 Full open-source-to-AWS mapping with reasoning: [docs/architecture.md](docs/architecture.md)
@@ -179,9 +179,10 @@ A few worth highlighting — full reasoning in [docs/architecture.md](docs/archi
 
 Core platform complete: ingestion, dbt transformation (36 passing tests),
 Airflow orchestration, Qdrant semantic search, hybrid RAG with conversation
-memory, and a Streamlit chat interface.
+memory, Streamlit chat interface, and analytics notebooks (EDA, Ridge
+regression with SHAP explainability, KMeans clustering comparing pre/post
+COVID country economic archetypes) — all tracked in MLflow.
 
-In progress: regression/clustering/classification analytics with MLflow
-tracking, Superset dashboards, CI/CD, and centralized logging.
+In progress: Superset dashboards and CI/CD.
 
 Full phase-by-phase progress: [docs/architecture.md](docs/architecture.md)

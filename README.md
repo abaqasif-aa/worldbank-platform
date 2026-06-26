@@ -138,14 +138,17 @@ one-line config change — no code changes required.
 
 ```
 services/
-  api/            FastAPI — RAG endpoint, query routing, country cache
+  api/            FastAPI — RAG endpoint, query routing, Redis cache, conversation memory
   ingestion/      Pulls World Bank API data into PostgreSQL
-  dbt/            Medallion architecture: staging, intermediate, marts
+  dbt/            Medallion architecture: staging, intermediate, marts (36 tests)
   embeddings/     Generates vectors for Qdrant via sentence-transformers
-  airflow/        DAG orchestrating the daily pipeline
-  streamlit/      Chat interface
+  airflow/        DAG orchestrating the daily pipeline (ingest → dbt → cache → embed)
+  streamlit/      Streamlit chat interface
+  jupyter/        Analytics notebooks (EDA, regression, clustering)
+docs/
+  architecture.md Architecture decisions, phase checklist
+  images/         Architecture diagram, screenshots
 data/             Local data volumes (gitignored)
-docs/             Architecture decisions, diagrams
 scripts/          One-time setup SQL
 ```
 

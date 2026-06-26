@@ -164,6 +164,11 @@ A few worth highlighting — full reasoning in [docs/architecture.md](docs/archi
   substitute for a specific AWS managed service, chosen to demonstrate that
   the underlying concepts — not just the managed API — are understood.
 
+- **Centralised logging deliberately omitted**: at single-machine scale,
+  `docker compose logs` is sufficient. ELK stack would add 3 services and
+  ~2GB RAM overhead with minimal benefit. In production this maps to AWS
+  CloudWatch — documented as a known gap, not an oversight.
+
 ## Status
 
 Core platform complete: ingestion, dbt transformation (36 passing tests),

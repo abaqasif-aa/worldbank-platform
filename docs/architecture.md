@@ -19,7 +19,8 @@ and run with a single command.
 | Vector DB | Qdrant |
 | LLM | LLaMA 3.1 8B (Ollama, local GPU) |
 | Chat interface | Streamlit |
-| Experiment tracking | MLflow (planned) |
+| Analytics | Jupyter notebooks (EDA, regression, clustering) |
+| Experiment tracking | MLflow |
 | Dashboards | Superset (planned) |
 
 ## Data model — medallion architecture
@@ -40,8 +41,6 @@ and run with a single command.
 - [x] Phase 10 — EDA notebook (distributions, correlations, outlier analysis)
 - [x] Phase 11 — Ridge regression with SHAP explainability (MLflow tracked)
 - [x] Phase 12 — KMeans clustering: 2019 vs 2022 COVID comparison (MLflow tracked)
-- [ ] Phase 13 — Superset dashboards
-- [ ] Phase 14 — CI/CD
 - [ ] Phase 13 — Superset dashboards
 - [ ] Phase 14 — CI/CD
 - [ ] ELK stack for centralised logging

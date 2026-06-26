@@ -32,8 +32,23 @@ jobs:
       - name: Validate dbt project
         run: |
           pip install dbt-postgres==1.7.0 protobuf==4.25.3 --quiet
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml << 'PROFILE'
+          worldbank_dbt:
+            target: dev
+            outputs:
+              dev:
+                type: postgres
+                host: localhost
+                port: 5432
+                dbname: worldbank
+                user: de
+                password: de
+                schema: staging
+                threads: 1
+          PROFILE
           cd services/dbt/worldbank_dbt
-          dbt parse --profiles-dir ..
+          dbt parse --profiles-dir ~/.dbt
         env:
           DBT_PROFILES_DIR: services/dbt
 

@@ -69,4 +69,4 @@ and run with a single command.
   30-minute inactivity TTL.
 
 ## Architecture
-![Architecture diagram](docs/images/architecture.png)
+![Architecture diagram](docs/images/architecture.svg)

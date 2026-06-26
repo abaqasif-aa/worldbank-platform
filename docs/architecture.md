@@ -41,7 +41,11 @@ and run with a single command.
 - [x] Phase 11 — Ridge regression with SHAP explainability (MLflow tracked)
 - [x] Phase 12 — KMeans clustering: 2019 vs 2022 COVID comparison (MLflow tracked)
 - [x] Phase 13 — CI/CD
-- [ ] ELK stack for centralised logging
+- [x] Centralised logging — deliberately omitted at single-machine scale.
+  `docker compose logs` provides sufficient observability. In production
+  this maps to AWS CloudWatch or an ELK stack (Elasticsearch, Logstash,
+  Kibana). Adding ELK would consume ~2GB RAM for Elasticsearch alone with
+  minimal benefit at this scale.
 
 ## Key design decisions
 

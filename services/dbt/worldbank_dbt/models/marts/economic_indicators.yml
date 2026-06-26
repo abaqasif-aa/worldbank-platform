@@ -6,8 +6,7 @@ models:
       Final analytical table — one row per country per year, enriched
       with country metadata (region, income group) and derived metrics
       (GDP growth rate, log GDP, crisis flags). This is the primary
-      table consumed by the RAG system, analytics models, and Superset
-      dashboards.
+      table consumed by the RAG system and analytics models.
     tests:
       - dbt_utils.unique_combination_of_columns:
           combination_of_columns:

@@ -68,7 +68,7 @@ Redis with a 30-minute inactivity TTL.
 | LLM | LLaMA 3.1 8B (Ollama, local GPU) | Bedrock |
 | Chat interface | Streamlit | — |
 | Experiment tracking | MLflow | SageMaker Experiments |
-| Dashboards | Apache Superset *(in progress)* | QuickSight |
+
 
 Full open-source-to-AWS mapping with reasoning: [docs/architecture.md](docs/architecture.md)
 
@@ -88,7 +88,7 @@ cd worldbank-platform
 # Build all service images
 docker compose build
 
-# Start the platform (postgres, redis, qdrant, mlflow, airflow, superset, api, jupyter, streamlit)
+# Start the platform (postgres, redis, qdrant, mlflow, airflow, api, jupyter, streamlit)
 ./start.sh
 ```
 
@@ -100,7 +100,6 @@ Once running:
 | API docs | http://localhost:8000/docs |
 | Airflow | http://localhost:8080 |
 | MLflow | http://localhost:5000 |
-| Superset | http://localhost:8088 |
 | Jupyter | http://localhost:8888 |
 
 First-time data load (run once):
@@ -187,6 +186,6 @@ memory, Streamlit chat interface, and analytics notebooks (EDA, Ridge
 regression with SHAP explainability, KMeans clustering comparing pre/post
 COVID country economic archetypes) — all tracked in MLflow.
 
-In progress: Superset dashboards and CI/CD.
+In progress: CI/CD.
 
 Full phase-by-phase progress: [docs/architecture.md](docs/architecture.md)

@@ -48,6 +48,7 @@ jobs:
                 threads: 1
           PROFILE
           cd services/dbt/worldbank_dbt
+          dbt deps --profiles-dir ~/.dbt
           dbt parse --profiles-dir ~/.dbt
         env:
           DBT_PROFILES_DIR: services/dbt

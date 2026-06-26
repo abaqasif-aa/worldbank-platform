@@ -77,20 +77,34 @@ Full open-source-to-AWS mapping with reasoning: [docs/architecture.md](docs/arch
 Requires Docker and Docker Compose. No cloud account or API keys needed —
 everything runs locally, including the LLM.
 
-> A single `setup.sh` that runs all of the steps below in order is planned
-> for the final phase of this project — for now, each step is run manually
-> as shown.
-
 ```bash
 git clone https://github.com/abaqasif-aa/worldbank-platform
 cd worldbank-platform
-
-# Build all service images
-docker compose build
-
-# Start the platform (postgres, redis, qdrant, mlflow, airflow, api, jupyter, streamlit)
-./start.sh
+./setup.sh
 ```
+
+`setup.sh` handles everything automatically:
+- Detects Windows (WSL2) vs Linux/Mac and configures accordingly
+- Copies `.env.example` to `.env` with sensible defaults
+- Builds all Docker images
+- Loads World Bank data into PostgreSQL
+- Runs dbt transformations (36 data quality tests)
+- Starts all services
+- Seeds Redis cache and generates Qdrant embeddings
+
+**One manual step — local LLM (required for RAG):**
+
+Install [Ollama](https://ollama.com) on your host machine, then:
+
+```bash
+ollama pull llama3.1:8b-instruct-q4_0
+```
+
+**Windows (WSL2):** Set `OLLAMA_HOST=0.0.0.0` in System Environment Variables and restart Ollama.  
+**Linux/Mac:** Run `OLLAMA_HOST=0.0.0.0 ollama serve`
+
+Once running, the chat interface at `http://localhost:8501` can answer
+natural language questions about global economic data.
 
 Once running:
 
@@ -102,37 +116,7 @@ Once running:
 | MLflow | http://localhost:5000 |
 | Jupyter | http://localhost:8888 |
 
-First-time data load (run once):
-
-```bash
-# Pull World Bank data into PostgreSQL
-docker compose --profile tasks run --rm ingestion
-
-# Load country reference data and build the dbt medallion layers
-docker compose --profile tasks run --rm dbt seed --project-dir /dbt/worldbank_dbt --profiles-dir /dbt
-docker compose --profile tasks run --rm dbt build --project-dir /dbt/worldbank_dbt --profiles-dir /dbt
-
-# Generate embeddings for semantic search
-docker compose --profile tasks run --rm embeddings
-```
-
-After this, Airflow runs the full pipeline (ingest → dbt → cache → embed)
-automatically every day at 6am UTC — see the [worldbank_pipeline DAG](services/airflow/dags/worldbank_pipeline.py).
-
-The RAG pipeline needs a local LLM via [Ollama](https://ollama.com), running
-on the host machine (not inside Docker, so it can use your GPU):
-
-```bash
-ollama pull llama3.1:8b-instruct-q4_0
-```
-
-Set `OLLAMA_MODEL` in `.env` to match. The API connects to Ollama via its
-OpenAI-compatible endpoint, so swapping to the real OpenAI API instead is a
-one-line config change — no code changes required.
-
-```bash
-./stop.sh
-```
+To stop: `./stop.sh` — To restart: `./restart.sh`
 
 ## Project structure
 

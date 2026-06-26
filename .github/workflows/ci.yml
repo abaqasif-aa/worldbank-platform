@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate Docker Compose config
+        run: docker compose config --quiet && echo "✓ docker-compose.yml is valid"
+
+      - name: Check Python syntax
+        run: |
+          python3 -m py_compile services/api/main.py
+          python3 -m py_compile services/api/cache.py
+          python3 -m py_compile services/api/rag.py
+          python3 -m py_compile services/api/query_engine.py
+          python3 -m py_compile services/ingestion/ingest.py
+          python3 -m py_compile services/embeddings/embed.py
+          echo "✓ All Python files pass syntax check"
+
+      - name: Validate dbt project
+        run: |
+          pip install dbt-postgres==1.7.0 --quiet
+          cd services/dbt/worldbank_dbt
+          dbt parse --profiles-dir ..
+        env:
+          DBT_PROFILES_DIR: services/dbt
+
+      - name: Check .env.example exists
+        run: |
+          test -f .env.example && echo "✓ .env.example exists"
+          
+      - name: Check setup.sh is executable
+        run: |
+          test -x setup.sh && echo "✓ setup.sh is executable"

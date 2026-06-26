@@ -59,4 +59,5 @@ jobs:
           
       - name: Check setup.sh is executable
         run: |
+          chmod +x setup.sh
           test -x setup.sh && echo "✓ setup.sh is executable"

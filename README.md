@@ -101,6 +101,7 @@ Once running:
 | Airflow | http://localhost:8080 |
 | MLflow | http://localhost:5000 |
 | Superset | http://localhost:8088 |
+| Jupyter | http://localhost:8888 |
 
 First-time data load (run once):
 

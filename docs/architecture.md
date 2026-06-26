@@ -37,7 +37,11 @@ and run with a single command.
 - [x] Phase 7 — Airflow DAG (ingest → dbt → cache refresh, DockerOperator, daily 6am UTC)
 - [x] Phase 8 — Embeddings + Qdrant (sentence-transformers, 384-dim, 3552 vectors)
 - [x] Phase 9 — RAG pipeline (SQL/semantic/hybrid routing, LLaMA 3.1 8B 100% GPU, conversation memory, Streamlit chat UI)
-- [ ] Phase 10-12 — Analytics + MLflow (regression, clustering, decision tree)
+- [x] Phase 10 — EDA notebook (distributions, correlations, outlier analysis)
+- [x] Phase 11 — Ridge regression with SHAP explainability (MLflow tracked)
+- [x] Phase 12 — KMeans clustering: 2019 vs 2022 COVID comparison (MLflow tracked)
+- [ ] Phase 13 — Superset dashboards
+- [ ] Phase 14 — CI/CD
 - [ ] Phase 13 — Superset dashboards
 - [ ] Phase 14 — CI/CD
 - [ ] ELK stack for centralised logging
